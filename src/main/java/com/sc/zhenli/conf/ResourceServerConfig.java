@@ -13,9 +13,11 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
-    @Override
 
+    //用来配置令牌端点(Token Endpoint)的安全约束.
+    @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
+
         resources.resourceId("users-info");
     }
 
