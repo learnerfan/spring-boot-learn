@@ -1,12 +1,15 @@
 server:
   port: 8043
   context-path: /uaa
+
 #  servlet:
 #    context-path: /uaa
 logging:
   level:
     org.springframework.security: DEBUG
 spring:
+  jpa:
+    show-sql: true
   application:
     name: oauth-server
   datasource:
