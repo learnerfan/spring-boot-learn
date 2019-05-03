@@ -1,19 +1,27 @@
 package com.sc.zhenli.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.sc.zhenli.bean.UserBean;
+import com.sc.zhenli.dao.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 /**
  * Created by songsf on 2019/3/31.
  */
 @RestController
-@RequestMapping("users")
+@RequestMapping("/api/v1.0/user")
 public class UserController {
-    @GetMapping("me")
-    public Principal me(Principal principal) {
-        return principal;
+    @Autowired
+    private UserDao userDao;
+    @RequestMapping(value = "/current",method = RequestMethod.GET)
+    public UserBean me(@RequestParam()String userName) {
+        List<UserBean> userBeen = userDao.getUserInfo(userName);
+        if (userBeen != null && userBeen.size() > 0){
+            return userBeen.get(0);
+        }
+        return new UserBean();
     }
 }
